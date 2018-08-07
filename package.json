@@ -1,0 +1,29 @@
+{
+  "name": "yandex-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch",
+    "build": "webpack",
+    "start": "webpack && node ./dist/bundle.js",
+    "lint": "eslint ./src"
+  },
+  "author": "Hiker-Hope",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.3.0",
+    "eslint-plugin-jest": "^21.18.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "jest": "^23.4.1",
+    "prettier": "^1.14.0",
+    "regenerator-runtime": "^0.12.0",
+    "webpack": "^4.16.3",
+    "webpack-cli": "^3.1.0"
+  }
+}
