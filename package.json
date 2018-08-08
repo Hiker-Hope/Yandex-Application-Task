@@ -9,6 +9,10 @@
     "start": "webpack && node ./dist/bundle.js",
     "lint": "eslint ./src"
   },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost/"
+  },
   "author": "Hiker-Hope",
   "license": "ISC",
   "devDependencies": {
