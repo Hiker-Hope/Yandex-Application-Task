@@ -1,4 +1,4 @@
-const SCHEDULE = createRange(0, 24).reduce(
+let SCHEDULE = createRange(0, 24).reduce(
   (acc, item, i) => ({ ...acc, [i]: [] }),
   {}
 );
@@ -26,7 +26,11 @@ export default function getSchedule({
   devices = [],
   rates = [],
   maxPower = 0
-}) {
+} = {}) {
+  SCHEDULE = createRange(0, 24).reduce(
+    (acc, item, i) => ({ ...acc, [i]: [] }),
+    {}
+  );
   const sortedRates = rates.sort((a, b) => a.value - b.value);
 
   // Проходим по тарифам, начиная с самого дешевого и пытаемся заполнить час устройствами
@@ -132,16 +136,17 @@ function getCurrentPower(index = 0, devices = []) {
 function isHourSuitable(hour, device = {}) {
   if (!hour) return;
 
-  const { mode } = device;
+  const { mode, duration } = device;
   if (!mode) {
     return true;
   }
 
-  if (mode == "day") {
-    return dayRange.includes(hour);
-  }
+  const endHour = hour + duration > 24 ? hour + duration - 24 : hour + duration;
 
-  return nightRange.includes(hour);
+  if (mode == "day") {
+    return dayRange.includes(hour) && dayRange.includes(endHour);
+  }
+  return nightRange.includes(hour) && nightRange.includes(endHour);
 }
 
 function formatNumber(num = 0) {
