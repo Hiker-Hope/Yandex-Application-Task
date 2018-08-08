@@ -65,6 +65,8 @@ export const mockInput1 = {
   maxPower: 2100
 };
 
+// Test 1
+
 export const mockInput2 = {
   devices: [
     {
@@ -108,4 +110,61 @@ export const mockInput2 = {
     }
   ],
   maxPower: 1900
+};
+
+// Test 2
+
+export const mockInput3 = {
+  devices: [
+    {
+      id: "F972B82BA56A70CC579945773B6866FB",
+      name: "Посудомоечная машина",
+      power: 1500,
+      duration: 5,
+      mode: "night"
+    },
+    {
+      id: "C515D887EDBBE669B2FDAC62F571E9E9",
+      name: "Духовка",
+      power: 1600,
+      duration: 4,
+      mode: "day"
+    },
+    {
+      id: "02DDD23A85DADDD71198305330CC386D",
+      name: "Холодильник",
+      power: 150,
+      duration: 24
+    },
+    {
+      id: "1E6276CC231716FE8EE8BC908486D41E",
+      name: "Термостат",
+      power: 100,
+      duration: 24
+    },
+    {
+      id: "7D9DC84AD110500D284B33C82FE6E85E",
+      name: "Стиральная машина",
+      power: 450,
+      duration: 3
+    }
+  ],
+  rates: [
+    {
+      from: 6,
+      to: 13,
+      value: 5.62
+    },
+    {
+      from: 13,
+      to: 19,
+      value: 4.14
+    },
+    {
+      from: 19,
+      to: 6,
+      value: 2.86
+    }
+  ],
+  maxPower: 1850
 };

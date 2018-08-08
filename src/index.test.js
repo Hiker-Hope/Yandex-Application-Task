@@ -1,16 +1,22 @@
 import getSchedule, { createRange } from "./index.js";
-import { mockInput1, mockInput2 } from "./mock";
+import { mockInput1, mockInput2, mockInput3 } from "./mock";
 
-import { result1, result2 } from "./mock-result";
+import { result1, result2, result3 } from "./mock-result";
 
 describe("getSchedule test", () => {
   it("returns correct expected result for mock1", () => {
     const result = getSchedule(mockInput1);
     expect(result).toEqual(result1);
   });
+
   it("returns correct expected result for mock2", () => {
     const result = getSchedule(mockInput2);
     expect(result).toEqual(result2);
+  });
+
+  it("returns correct expected result for mock3", () => {
+    const result = getSchedule(mockInput3);
+    expect(result).toEqual(result3);
   });
 });
 
