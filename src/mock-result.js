@@ -117,7 +117,7 @@ export const result0 = {
   }
 };
 
-// Correct output for the first input
+// Correct output for Yandex input
 
 export const result1 = {
   schedule: {
@@ -235,6 +235,8 @@ export const result1 = {
     }
   }
 };
+
+// Test 1 input
 
 export const result2 = {
   schedule: {
@@ -357,6 +359,8 @@ export const result2 = {
     }
   }
 };
+
+// Test 2 input
 
 export const result3 = {
   schedule: {
