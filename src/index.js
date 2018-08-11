@@ -1,7 +1,3 @@
-let SCHEDULE = createRange(0, 24).reduce(
-  (acc, item, i) => ({ ...acc, [i]: [] }),
-  {}
-);
 const DAY = [7, 21];
 const NIGHT = [21, 7];
 
@@ -9,8 +5,6 @@ const [dayStart, dayEnd] = DAY;
 const [nightStart, nightEnd] = NIGHT;
 const dayRange = createRange(dayStart, dayEnd);
 const nightRange = createRange(nightStart, nightEnd);
-
-const USED_DEVICES = [];
 
 export function createRange(startAt = 0, endAt = 0) {
   const size = endAt - startAt;
@@ -27,22 +21,24 @@ export default function getSchedule({
   rates = [],
   maxPower = 0
 } = {}) {
-  SCHEDULE = createRange(0, 24).reduce(
+  const SCHEDULE = createRange(0, 24).reduce(
     (acc, item, i) => ({ ...acc, [i]: [] }),
     {}
   );
+  const USED_DEVICES = [];
   const sortedRates = rates.sort((a, b) => a.value - b.value);
 
   // Проходим по тарифам, начиная с самого дешевого и пытаемся заполнить час устройствами
 
   sortedRates.forEach(({ from, to }) => {
     let currentHour = from;
-    while (currentHour != to) {
-      populateHour(currentHour, devices, maxPower);
+    let endHour = to > 23 ? to - 24 : to;
+    do {
+      populateHour(currentHour, devices, maxPower, SCHEDULE, USED_DEVICES);
       SCHEDULE[currentHour].sort();
       currentHour++;
       if (currentHour > 23) currentHour = 0;
-    }
+    } while (currentHour != endHour);
   });
   const result = {};
   result.schedule = SCHEDULE;
@@ -90,16 +86,23 @@ function getConsumedEnergy(schedule = {}, devices = [], rates = []) {
   return result;
 }
 
-function populateHour(hour = 0, devices = [], maxPower = 0) {
+function populateHour(
+  hour = 0,
+  devices = [],
+  maxPower = 0,
+  schedule = {},
+  USED_DEVICES = []
+) {
   const possibleDevices = devices.filter(
     device => !USED_DEVICES.includes(device.id) && isHourSuitable(hour, device)
   );
-  const sortedByPower = possibleDevices.sort((a, b) => b.power - a.power);
+  const sortedDevices = possibleDevices.sort(
+    (a, b) => (b.duration == 24 ? 1 : b.power - a.power)
+  );
 
-  let currentPower = getCurrentPower(hour, devices);
-  for (let i = 0; i < sortedByPower.length; i++) {
-    const device = sortedByPower[i];
-
+  let currentPower = getCurrentPower(hour, devices, schedule);
+  for (let i = 0; i < sortedDevices.length; i++) {
+    const device = sortedDevices[i];
     // Не выходим из цикла, т.к. могут оказаться маломощные приборы, которые все еще можно добавить
 
     if (currentPower + device.power > maxPower) {
@@ -110,15 +113,15 @@ function populateHour(hour = 0, devices = [], maxPower = 0) {
     USED_DEVICES.push(device.id);
     let currentHour = hour;
     for (let i = 0; i < device.duration; i++) {
-      SCHEDULE[currentHour].push(device.id);
+      schedule[currentHour].push(device.id);
       currentHour++;
       if (currentHour > 23) currentHour = 0;
     }
   }
 }
 
-function getCurrentPower(index = 0, devices = []) {
-  const hour = SCHEDULE[index];
+function getCurrentPower(index = 0, devices = [], schedule = {}) {
+  const hour = schedule[index];
   return (
     hour &&
     hour.reduce((total, id) => {
@@ -130,11 +133,10 @@ function getCurrentPower(index = 0, devices = []) {
   );
 }
 
-// TODO учитывать mode на окончание действия
 // TODO учитывать power на протяжении работы
 
 function isHourSuitable(hour, device = {}) {
-  if (!hour) return;
+  if (!hour && hour !== 0) return;
 
   const { mode, duration } = device;
   if (!mode) {
