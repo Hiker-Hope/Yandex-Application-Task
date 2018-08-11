@@ -94,7 +94,10 @@ function populateHour(
   USED_DEVICES = []
 ) {
   const possibleDevices = devices.filter(
-    device => !USED_DEVICES.includes(device.id) && isHourSuitable(hour, device)
+    device =>
+      !USED_DEVICES.includes(device.id) &&
+      isHourSuitable(hour, device) &&
+      isPowerEnough(maxPower, hour, device, schedule, devices)
   );
   const sortedDevices = possibleDevices.sort(
     (a, b) => (b.duration == 24 ? 1 : b.power - a.power)
@@ -133,7 +136,30 @@ function getCurrentPower(index = 0, devices = [], schedule = {}) {
   );
 }
 
-// TODO учитывать power на протяжении работы
+// Учитываем power на протяжении работы
+
+function isPowerEnough(
+  maxPower = 0,
+  hour,
+  device = {},
+  schedule = {},
+  devices = []
+) {
+  const { duration, power: devicePower } = device;
+  const endHour = hour + duration > 23 ? hour + duration - 24 : hour + duration;
+  const workRange = createRange(hour, endHour);
+
+  // Находим час, в который будет превышение макс мощности
+
+  const result = workRange.find(hour => {
+    const power = getCurrentPower(hour, devices, schedule);
+    return power + devicePower > maxPower;
+  });
+
+  //Если нашли час, то вернем false + защита от нулевого часа
+
+  return !result && result !== 0;
+}
 
 function isHourSuitable(hour, device = {}) {
   if (!hour && hour !== 0) return;
@@ -143,7 +169,7 @@ function isHourSuitable(hour, device = {}) {
     return true;
   }
 
-  const endHour = hour + duration > 24 ? hour + duration - 24 : hour + duration;
+  const endHour = hour + duration > 24 ? hour + duration - 25 : hour + duration;
 
   if (mode == "day") {
     return dayRange.includes(hour) && dayRange.includes(endHour);
@@ -154,3 +180,51 @@ function isHourSuitable(hour, device = {}) {
 function formatNumber(num = 0) {
   return +num.toFixed(4);
 }
+
+// export const mockInput4 = {
+//   devices: [
+//     {
+//       id: "F972B82BA56A70CC579945773B6866FB",
+//       name: "Посудомоечная машина",
+//       power: 1400,
+//       duration: 4,
+//       mode: "night"
+//     },
+//     {
+//       id: "C515D887EDBBE669B2FDAC62F571E9E9",
+//       name: "Духовка",
+//       power: 1600,
+//       duration: 5,
+//       mode: "day"
+//     },
+//     {
+//       id: "02DDD23A85DADDD71198305330CC386D",
+//       name: "Холодильник",
+//       power: 100,
+//       duration: 24
+//     },
+//     {
+//       id: "1E6276CC231716FE8EE8BC908486D41E",
+//       name: "Термостат",
+//       power: 150,
+//       duration: 24
+//     },
+//     {
+//       id: "7D9DC84AD110500D284B33C82FE6E85E",
+//       name: "Стиральная машина",
+//       power: 300,
+//       duration: 2
+//     }
+//   ],
+//   rates: [
+//     {
+//       from: 0,
+//       to: 25,
+//       value: 4.46
+//     }
+//   ],
+//   maxPower: 1900
+// };
+
+// const x = getSchedule(mockInput4);
+// console.log(x);
