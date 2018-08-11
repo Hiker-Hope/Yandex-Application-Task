@@ -1,4 +1,4 @@
-// Yandex input data
+// Test 1 input - Yandex input data
 
 export const mockInput1 = {
   devices: [
@@ -65,7 +65,7 @@ export const mockInput1 = {
   maxPower: 2100
 };
 
-// Test 1
+// Test 2 input - Choosing the correct range
 
 export const mockInput2 = {
   devices: [
@@ -112,7 +112,7 @@ export const mockInput2 = {
   maxPower: 1900
 };
 
-// Test 2
+// Test 3 input - Choosing the cheapest period for one device
 
 export const mockInput3 = {
   devices: [
@@ -169,9 +169,190 @@ export const mockInput3 = {
   maxPower: 1850
 };
 
-// Test 3
+// Test 4 input - Incorrect rate
 
 export const mockInput4 = {
+  devices: [
+    {
+      id: "F972B82BA56A70CC579945773B6866FB",
+      name: "Посудомоечная машина",
+      power: 1400,
+      duration: 4,
+      mode: "night"
+    },
+    {
+      id: "C515D887EDBBE669B2FDAC62F571E9E9",
+      name: "Духовка",
+      power: 1600,
+      duration: 5,
+      mode: "day"
+    },
+    {
+      id: "02DDD23A85DADDD71198305330CC386D",
+      name: "Холодильник",
+      power: 100,
+      duration: 24
+    },
+    {
+      id: "1E6276CC231716FE8EE8BC908486D41E",
+      name: "Термостат",
+      power: 150,
+      duration: 24
+    },
+    {
+      id: "7D9DC84AD110500D284B33C82FE6E85E",
+      name: "Стиральная машина",
+      power: 300,
+      duration: 2
+    }
+  ],
+  rates: [
+    {
+      from: 0,
+      to: 24,
+      value: 4.46
+    }
+  ],
+  maxPower: 1900
+};
+
+// Test 5 input - Insufficient power
+
+export const mockInput5 = {
+  devices: [
+    {
+      id: "F972B82BA56A70CC579945773B6866FB",
+      name: "Посудомоечная машина",
+      power: 1400,
+      duration: 4,
+      mode: "night"
+    },
+    {
+      id: "C515D887EDBBE669B2FDAC62F571E9E9",
+      name: "Духовка",
+      power: 1600,
+      duration: 5,
+      mode: "day"
+    },
+    {
+      id: "02DDD23A85DADDD71198305330CC386D",
+      name: "Холодильник",
+      power: 100,
+      duration: 24
+    },
+    {
+      id: "1E6276CC231716FE8EE8BC908486D41E",
+      name: "Термостат",
+      power: 150,
+      duration: 24
+    },
+    {
+      id: "7D9DC84AD110500D284B33C82FE6E85E",
+      name: "Стиральная машина",
+      power: 1000,
+      duration: 24
+    }
+  ],
+  rates: [
+    {
+      from: 0,
+      to: 24,
+      value: 4.46
+    }
+  ],
+  maxPower: 1300
+};
+
+// Test 6 input - Expensive night
+
+export const mockInput6 = {
+  devices: [
+    {
+      id: "F972B82BA56A70CC579945773B6866FB",
+      name: "Посудомоечная машина",
+      power: 1400,
+      duration: 4,
+      mode: "night"
+    },
+    {
+      id: "C515D887EDBBE669B2FDAC62F571E9E9",
+      name: "Духовка",
+      power: 1600,
+      duration: 5,
+      mode: "day"
+    },
+    {
+      id: "02DDD23A85DADDD71198305330CC386D",
+      name: "Холодильник",
+      power: 100,
+      duration: 10,
+      mode: "night"
+    },
+    {
+      id: "1E6276CC231716FE8EE8BC908486D41E",
+      name: "Термостат",
+      power: 100,
+      duration: 10,
+      mode: "night"
+    },
+    {
+      id: "7D9DC84AD110500D284B33C82FE6E85E",
+      name: "Стиральная машина",
+      power: 1000,
+      duration: 3,
+      mode: "night"
+    }
+  ],
+  rates: [
+    {
+      from: 21,
+      to: 0,
+      value: 1
+    },
+    {
+      from: 0,
+      to: 7,
+      value: 15
+    },
+    {
+      from: 7,
+      to: 21,
+      value: 1
+    }
+  ],
+  maxPower: 1600
+};
+
+// Test 7 input - Not enough power during working period
+
+export const mockInput7 = {
+  devices: [
+    {
+      id: "F972B82BA56A70CC579945773B6866FB",
+      name: "Посудомоечная машина",
+      power: 1400,
+      duration: 3
+    },
+    {
+      id: "R972B82BA56A70CC579945773B6866FB",
+      name: "Алиса",
+      power: 200,
+      duration: 22
+    }
+  ],
+  rates: [
+    {
+      from: 0,
+      to: 24,
+      value: 1
+    }
+  ],
+  maxPower: 1400
+};
+
+// Test 8 input - No 24-hour devices
+
+export const mockInput8 = {
   devices: [
     {
       id: "F972B82BA56A70CC579945773B6866FB",
@@ -233,9 +414,9 @@ export const mockInput4 = {
   maxPower: 2000
 };
 
-// Test 4
+// Test 9 input - Choosing the cheapest period for multiple devices
 
-export const mockInput5 = {
+export const mockInput9 = {
   devices: [
     {
       id: "F972B82BA56A70CC579945773B6866FB",
