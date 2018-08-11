@@ -236,7 +236,7 @@ export const result1 = {
   }
 };
 
-// Test 1 input
+// Test 1 output
 
 export const result2 = {
   schedule: {
@@ -360,7 +360,7 @@ export const result2 = {
   }
 };
 
-// Test 2 input
+// Test 2 output
 
 export const result3 = {
   schedule: {
@@ -481,6 +481,100 @@ export const result3 = {
       "02DDD23A85DADDD71198305330CC386D": 14.346,
       "1E6276CC231716FE8EE8BC908486D41E": 9.564,
       "7D9DC84AD110500D284B33C82FE6E85E": 3.861
+    }
+  }
+};
+
+// Test 3 output
+
+export const result4 = {
+  schedule: {
+    "0": [
+      "1E6276CC231716FE8EE8BC908486D41E",
+      "F972B82BA56A70CC579945773B6866FB"
+    ],
+    "1": [
+      "1E6276CC231716FE8EE8BC908486D41E",
+      "F972B82BA56A70CC579945773B6866FB"
+    ],
+    "2": [
+      "1E6276CC231716FE8EE8BC908486D41E"
+    ],
+    "3": [
+      "1E6276CC231716FE8EE8BC908486D41E"
+    ],
+    "4": [],
+    "5": [],
+    "6": [
+      
+    ],
+    "7": [
+      
+    ],
+    "8": [
+      
+    ],
+    "9": [
+      
+    ],
+    "10": [
+      
+    ],
+    "11": [
+      
+    ],
+    "12": [
+      "02DDD23A85DADDD71198305330CC386D",
+      "C515D887EDBBE669B2FDAC62F571E9E9"
+    ],
+    "13": [
+      "02DDD23A85DADDD71198305330CC386D",
+      "C515D887EDBBE669B2FDAC62F571E9E9"
+    ],
+    "14": [
+      "02DDD23A85DADDD71198305330CC386D",
+      "C515D887EDBBE669B2FDAC62F571E9E9"
+    ],
+    "15": [
+      "02DDD23A85DADDD71198305330CC386D",
+      "C515D887EDBBE669B2FDAC62F571E9E9"
+    ],
+    "16": [
+      "02DDD23A85DADDD71198305330CC386D"
+    ],
+    "17": [
+      "02DDD23A85DADDD71198305330CC386D"
+    ],
+    "18": [
+      
+    ],
+    "19": [
+      
+    ],
+    "20": [
+      "7D9DC84AD110500D284B33C82FE6E85E"
+    ],
+    "21": [
+      "7D9DC84AD110500D284B33C82FE6E85E",
+      "F972B82BA56A70CC579945773B6866FB"
+    ],
+    "22": [
+      "7D9DC84AD110500D284B33C82FE6E85E",
+      "F972B82BA56A70CC579945773B6866FB"
+    ],
+    "23": [
+      "1E6276CC231716FE8EE8BC908486D41E",
+      "F972B82BA56A70CC579945773B6866FB"
+    ]
+  },
+  consumedEnergy: {
+    value: 50.403,
+    devices: {
+      F972B82BA56A70CC579945773B6866FB: 16.3875,
+      C515D887EDBBE669B2FDAC62F571E9E9: 12.48,
+      "02DDD23A85DADDD71198305330CC386D": 7.488,
+      "1E6276CC231716FE8EE8BC908486D41E": 11.055,
+      "7D9DC84AD110500D284B33C82FE6E85E": 2.9925
     }
   }
 };

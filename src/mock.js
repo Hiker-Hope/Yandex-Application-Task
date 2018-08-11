@@ -168,3 +168,67 @@ export const mockInput3 = {
   ],
   maxPower: 1850
 };
+
+// Test 3
+
+export const mockInput4 = {
+  devices: [
+    {
+      id: "F972B82BA56A70CC579945773B6866FB",
+      name: "Посудомоечная машина",
+      power: 1150,
+      duration: 5,
+      mode: "night"
+    },
+    {
+      id: "C515D887EDBBE669B2FDAC62F571E9E9",
+      name: "Духовка",
+      power: 1000,
+      duration: 4,
+      mode: "day"
+    },
+    {
+      id: "02DDD23A85DADDD71198305330CC386D",
+      name: "Телевизор",
+      power: 400,
+      duration: 6,
+      mode: "day"
+    },
+    {
+      id: "1E6276CC231716FE8EE8BC908486D41E",
+      name: "Водонагреватель",
+      power: 750,
+      duration: 5,
+      mode: "night"
+    },
+    {
+      id: "7D9DC84AD110500D284B33C82FE6E85E",
+      name: "Стиральная машина",
+      power: 350,
+      duration: 3
+    }
+  ],
+  rates: [
+    {
+      from: 3,
+      to: 8,
+      value: 3.34
+    },
+    {
+      from: 8,
+      to: 12,
+      value: 4.38
+    },
+    {
+      from: 12,
+      to: 20,
+      value: 3.12
+    },
+    {
+      from: 20,
+      to: 3,
+      value: 2.85
+    }
+  ],
+  maxPower: 2000
+};
