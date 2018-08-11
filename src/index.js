@@ -106,6 +106,7 @@ function populateHour(
   let currentPower = getCurrentPower(hour, devices, schedule);
   for (let i = 0; i < sortedDevices.length; i++) {
     const device = sortedDevices[i];
+
     // Не выходим из цикла, т.к. могут оказаться маломощные приборы, которые все еще можно добавить
 
     if (currentPower + device.power > maxPower) {
@@ -169,7 +170,8 @@ function isHourSuitable(hour, device = {}) {
     return true;
   }
 
-  const endHour = hour + duration > 24 ? hour + duration - 25 : hour + duration;
+  const endHour =
+    hour + duration > 23 ? hour + duration - 25 : hour + duration - 1;
 
   if (mode == "day") {
     return dayRange.includes(hour) && dayRange.includes(endHour);
@@ -180,51 +182,3 @@ function isHourSuitable(hour, device = {}) {
 function formatNumber(num = 0) {
   return +num.toFixed(4);
 }
-
-// export const mockInput4 = {
-//   devices: [
-//     {
-//       id: "F972B82BA56A70CC579945773B6866FB",
-//       name: "Посудомоечная машина",
-//       power: 1400,
-//       duration: 4,
-//       mode: "night"
-//     },
-//     {
-//       id: "C515D887EDBBE669B2FDAC62F571E9E9",
-//       name: "Духовка",
-//       power: 1600,
-//       duration: 5,
-//       mode: "day"
-//     },
-//     {
-//       id: "02DDD23A85DADDD71198305330CC386D",
-//       name: "Холодильник",
-//       power: 100,
-//       duration: 24
-//     },
-//     {
-//       id: "1E6276CC231716FE8EE8BC908486D41E",
-//       name: "Термостат",
-//       power: 150,
-//       duration: 24
-//     },
-//     {
-//       id: "7D9DC84AD110500D284B33C82FE6E85E",
-//       name: "Стиральная машина",
-//       power: 300,
-//       duration: 2
-//     }
-//   ],
-//   rates: [
-//     {
-//       from: 0,
-//       to: 25,
-//       value: 4.46
-//     }
-//   ],
-//   maxPower: 1900
-// };
-
-// const x = getSchedule(mockInput4);
-// console.log(x);
